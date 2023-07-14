@@ -10,7 +10,7 @@ CREATE TABLE book
 
 CREATE TABLE orders
 (
-    order_id     BIGINT auto_increment PRIMARY KEY,
+    order_id     VARCHAR(50) PRIMARY KEY,
     address      VARCHAR(100) NOT NULL,
     postcode     VARCHAR(10)  NOT NULL,
     created_at    datetime(6) NOT NULL,

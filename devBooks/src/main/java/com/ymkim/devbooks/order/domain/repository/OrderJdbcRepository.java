@@ -36,10 +36,15 @@ public class OrderJdbcRepository implements OrderRepository {
     }
 
     @Override
-    public Optional<Order> findById(long orderId) {
+    public Optional<Order> findById(String orderId) {
         return Optional.ofNullable(jdbcTemplate.queryForObject("SELECT * FROM orders WHERE order_id = :orderId",
                 Collections.singletonMap("orderId", orderId),
                 orderRowMapper));
+    }
+
+    @Override
+    public List<Order> findAll() {
+        return jdbcTemplate.query("SELECT * FROM orders", orderRowMapper);
     }
 
     private Map<String, Object> toOrderParamMap(Order order) {
@@ -62,7 +67,7 @@ public class OrderJdbcRepository implements OrderRepository {
     }
 
     private final RowMapper<Order> orderRowMapper = (resulSet, rowNum) -> {
-        var orderId = resulSet.getLong("order_id");
+        var orderId = resulSet.getString("order_id");
         var address = resulSet.getString("address");
         var postcode = resulSet.getString("postcode");
         var createdAt = toLocalDateTime(resulSet.getTimestamp("created_at"));

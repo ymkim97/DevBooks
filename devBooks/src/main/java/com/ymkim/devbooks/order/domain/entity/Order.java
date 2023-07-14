@@ -15,22 +15,14 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Order {
     @Id
-    private long orderId;
+    private String orderId;
     private String address;
     private String postcode;
     private LocalDateTime createdAt;
     private List<OrderItem> orderItems;
     private OrderStatus orderStatus;
 
-    public Order(String address, String postcode, LocalDateTime createdAt, List<OrderItem> orderItems, OrderStatus orderStatus) {
-        this.address = address;
-        this.postcode = postcode;
-        this.createdAt = createdAt;
-        this.orderItems = orderItems;
-        this.orderStatus = orderStatus;
-    }
-
-    public Order(long orderId, String address, String postcode, LocalDateTime createdAt, OrderStatus orderStatus) {
+    public Order(String orderId, String address, String postcode, LocalDateTime createdAt, OrderStatus orderStatus) {
         this.orderId = orderId;
         this.address = address;
         this.postcode = postcode;
