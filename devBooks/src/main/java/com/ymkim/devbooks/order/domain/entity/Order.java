@@ -1,6 +1,5 @@
 package com.ymkim.devbooks.order.domain.entity;
 
-import com.ymkim.devbooks.orderitem.domain.entity.OrderItem;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -27,6 +27,15 @@ public class Order {
         this.postcode = postcode;
         this.createdAt = createdAt;
         this.orderItems = orderItems;
+        this.orderStatus = orderStatus;
+    }
+
+    public Order(long orderId, String address, String postcode, LocalDateTime createdAt, OrderStatus orderStatus) {
+        this.orderId = orderId;
+        this.address = address;
+        this.postcode = postcode;
+        this.createdAt = createdAt;
+        this.orderItems = Collections.emptyList();
         this.orderStatus = orderStatus;
     }
 }

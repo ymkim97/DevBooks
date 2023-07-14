@@ -24,7 +24,7 @@ class BookJdbcRepositoryTest {
     BookJdbcRepository repository;
 
     @AfterEach
-    void setUp() {
+    void clear() {
         repository.deleteAll();
     }
 

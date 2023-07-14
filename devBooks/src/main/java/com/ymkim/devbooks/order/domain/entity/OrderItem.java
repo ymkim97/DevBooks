@@ -1,4 +1,4 @@
-package com.ymkim.devbooks.orderitem.domain.entity;
+package com.ymkim.devbooks.order.domain.entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;
