@@ -1,17 +1,13 @@
 package com.ymkim.devbooks.book.domain.entity;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
 
 @Getter
-@Table("BOOKS")
+@Table("BOOK")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Book {
     @Id
@@ -22,8 +18,6 @@ public class Book {
     private long price;
     private LocalDate publishedAt;
 
-    @Builder
-    @PersistenceCreator
     public Book(String title, String author, Category category, long price, LocalDate publishedAt) {
         this.title = title;
         this.author = author;

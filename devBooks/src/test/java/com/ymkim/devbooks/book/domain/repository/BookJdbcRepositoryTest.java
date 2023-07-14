@@ -2,7 +2,7 @@ package com.ymkim.devbooks.book.domain.repository;
 
 import com.ymkim.devbooks.book.domain.entity.Book;
 import com.ymkim.devbooks.book.domain.entity.Category;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ class BookJdbcRepositoryTest {
     @Autowired
     BookJdbcRepository repository;
 
-    @BeforeEach
+    @AfterEach
     void setUp() {
         repository.deleteAll();
     }
@@ -32,13 +32,13 @@ class BookJdbcRepositoryTest {
     @DisplayName("Book save test")
     void saveTest() {
         // given
-        Book book = Book.builder()
-                .title("TestBook")
-                .author("TestAuthor")
-                .price(5000)
-                .category(Category.FICTION)
-                .publishedAt(LocalDateTime.now().toLocalDate())
-                .build();
+        Book book = new Book("TestBook",
+                "TestAuthor",
+                Category.FICTION,
+                5000,
+                LocalDateTime.now().toLocalDate()
+        );
+
 
         // when
         repository.save(book);
@@ -53,21 +53,21 @@ class BookJdbcRepositoryTest {
     @DisplayName("두개의 Book save test")
     void multipleSaveTest() {
         // given
-        Book book1 = Book.builder()
-                .title("TestBook")
-                .author("TestAuthor")
-                .price(5000)
-                .category(Category.FICTION)
-                .publishedAt(LocalDateTime.now().toLocalDate())
-                .build();
+        Book book1 = new Book(
+                "TestBook",
+                "TestAuthor",
+                Category.FICTION,
+                5000,
+                LocalDateTime.now().toLocalDate()
+        );
 
-        Book book2 = Book.builder()
-                .title("TestBook2")
-                .author("TestAuthor2")
-                .price(3000)
-                .category(Category.MYSTERY)
-                .publishedAt(LocalDateTime.now().toLocalDate())
-                .build();
+        Book book2 = new Book(
+                "TestBook2",
+                "TestAuthor2",
+                Category.MYSTERY,
+                2000,
+                LocalDateTime.now().toLocalDate()
+        );
 
         // when
         repository.save(book1);
