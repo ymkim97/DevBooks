@@ -1,7 +1,6 @@
 package com.ymkim.devbooks.order.domain.repository;
 
 import com.ymkim.devbooks.order.domain.entity.Order;
-import com.ymkim.devbooks.order.domain.entity.OrderItem;
 import com.ymkim.devbooks.order.domain.entity.OrderStatus;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -11,10 +10,11 @@ import java.util.*;
 
 import static com.ymkim.devbooks.global.util.JdbcUtils.toLocalDateTime;
 
+@Deprecated
 @Repository
-public class OrderJdbcRepository implements OrderRepository {
+public class OrderJdbcRepository {
 
-    private final NamedParameterJdbcTemplate jdbcTemplate;
+    /*private final NamedParameterJdbcTemplate jdbcTemplate;
 
     public OrderJdbcRepository(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -25,8 +25,6 @@ public class OrderJdbcRepository implements OrderRepository {
         jdbcTemplate.update("INSERT INTO orders(order_id, address, postcode, created_at, order_status) " +
                 "VALUES(:orderId, :address, :postcode, :createdAt, :orderStatus)", toOrderParamMap(order));
 
-        order.getOrderItems().forEach(orderItem -> jdbcTemplate.update("INSERT INTO order_item(order_id, book_id, quantity) " +
-                "VALUES(:orderId, :bookId, :quantity)", toOrderItemParamMap(orderItem)));
         return order;
     }
 
@@ -53,16 +51,7 @@ public class OrderJdbcRepository implements OrderRepository {
         paramMap.put("address", order.getAddress());
         paramMap.put("postcode", order.getPostcode());
         paramMap.put("createdAt", order.getCreatedAt());
-        paramMap.put("orderItems", order.getOrderItems());
         paramMap.put("orderStatus", order.getOrderStatus().toString());
-        return paramMap;
-    }
-
-    private Map<String, Object> toOrderItemParamMap(OrderItem orderItem) {
-        var paramMap = new HashMap<String, Object>();
-        paramMap.put("orderId", orderItem.getOrderId());
-        paramMap.put("bookId", orderItem.getBookId());
-        paramMap.put("quantity", orderItem.getQuantity());
         return paramMap;
     }
 
@@ -73,5 +62,5 @@ public class OrderJdbcRepository implements OrderRepository {
         var createdAt = toLocalDateTime(resulSet.getTimestamp("created_at"));
         var orderStatus = resulSet.getString("order_status");
         return new Order(orderId, address, postcode, createdAt, OrderStatus.valueOf(orderStatus));
-    };
+    };*/
 }

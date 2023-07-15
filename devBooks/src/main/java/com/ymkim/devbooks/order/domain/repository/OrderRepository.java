@@ -1,14 +1,7 @@
 package com.ymkim.devbooks.order.domain.repository;
 
 import com.ymkim.devbooks.order.domain.entity.Order;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-import java.util.Optional;
-
-public interface OrderRepository {
-
-    Order save(Order order);
-    void deleteAll();
-    Optional<Order> findById(String orderId);
-    List<Order> findAll();
+public interface OrderRepository extends CrudRepository<Order, Long> {
 }

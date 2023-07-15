@@ -10,8 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,7 +29,7 @@ class OrderJdbcRepositoryTest {
     @DisplayName("Order save test")
     void saveTest() {
         // given
-        var order = new Order(UUID.randomUUID().toString(), "서울 송파구", "05123", LocalDateTime.now(), OrderStatus.ACCEPTED);
+        var order = new Order("서울 송파구", "05123", LocalDateTime.now(), OrderStatus.ACCEPTED);
 
         // when
         orderRepository.save(order);
@@ -43,18 +41,36 @@ class OrderJdbcRepositoryTest {
     }
 
     @Test
+    @DisplayName("Multiple Order Save Test")
+    void saveMultipleTest() {
+        // given
+        var order1 = new Order("서울 송파구", "05123", LocalDateTime.now(), OrderStatus.ACCEPTED);
+        var order2 = new Order("서울 강남구", "13142", LocalDateTime.now(), OrderStatus.SETTLED);
+
+        // when
+        orderRepository.save(order1);
+        orderRepository.save(order2);
+        var orders = orderRepository.findAll();
+
+        // then
+        assertThat(orders)
+                .isNotEmpty()
+                .hasSize(2);
+    }
+
+    @Test
     @DisplayName("Order findAll test")
     void findAllTest() {
         // given
-        var order1 = new Order(UUID.randomUUID().toString(), "서울 송파구", "05123", LocalDateTime.now(), OrderStatus.ACCEPTED);
-        var order2 = new Order(UUID.randomUUID().toString(), "서울 강남구", "21323", LocalDateTime.now(), OrderStatus.SHIPPED);
-        var order3 = new Order(UUID.randomUUID().toString(), "서울 성북구", "19523", LocalDateTime.now(), OrderStatus.READY_FOR_DELIVERY);
+        var order1 = new Order("서울 송파구", "05123", LocalDateTime.now(), OrderStatus.ACCEPTED);
+        var order2 = new Order("서울 강남구", "21323", LocalDateTime.now(), OrderStatus.SHIPPED);
+        var order3 = new Order("서울 성북구", "19523", LocalDateTime.now(), OrderStatus.READY_FOR_DELIVERY);
 
         // when
         orderRepository.save(order1);
         orderRepository.save(order2);
         orderRepository.save(order3);
-        List<Order> orders = orderRepository.findAll();
+        var orders = orderRepository.findAll();
 
         // then
         assertThat(orders).hasSize(3);

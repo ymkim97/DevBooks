@@ -2,6 +2,7 @@ package com.ymkim.devbooks.book.domain.repository;
 
 import com.ymkim.devbooks.book.domain.entity.Book;
 import com.ymkim.devbooks.book.domain.entity.Category;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import java.util.stream.StreamSupport;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 @SpringBootTest
 @ActiveProfiles("test")
 class BookJdbcRepositoryTest {
@@ -78,5 +80,6 @@ class BookJdbcRepositoryTest {
 
         // then
         assertThat(savedBooks).hasSize(2);
+        savedBooks.forEach(book -> log.info("{}", book.getBookId()));
     }
 }
