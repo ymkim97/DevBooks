@@ -1,5 +1,6 @@
 package com.ymkim.devbooks.book.domain.entity;
 
+import com.ymkim.devbooks.book.domain.dto.request.UpdateBookRequestDto;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
@@ -26,7 +27,7 @@ public class Book {
         this.publishedAt = publishedAt;
     }
 
-    public void updateBook(long price) {
-        this.price = price;
+    public void update(UpdateBookRequestDto bookRequestDto) {
+        this.price = bookRequestDto.price();
     }
 }

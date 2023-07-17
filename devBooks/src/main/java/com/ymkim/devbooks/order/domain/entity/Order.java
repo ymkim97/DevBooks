@@ -1,5 +1,6 @@
 package com.ymkim.devbooks.order.domain.entity;
 
+import com.ymkim.devbooks.order.domain.dto.request.UpdateOrderRequestDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,11 @@ public class Order {
         this.postcode = postcode;
         this.createdAt = createdAt;
         this.orderStatus = orderStatus;
+    }
+
+    public void update(UpdateOrderRequestDto orderRequestDto) {
+        this.address = orderRequestDto.address();
+        this.postcode = orderRequestDto.postcode();
+        this.orderStatus = orderRequestDto.orderStatus();
     }
 }

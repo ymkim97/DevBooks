@@ -46,9 +46,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDto updateBook(UpdateBookRequestDto updateBookRequestDto) {
         Book book = bookRepository.findById(updateBookRequestDto.bookId())
-                .orElseThrow(() -> new NoSuchElementException(ExceptionMessages.NO_BOOK_FOUND_BY_ID.getMessage()));
+                .orElseThrow(() -> new NoSuchElementException(ExceptionMessages.NO_BOOK_FOUND_BY_ID_ERROR.getMessage()));
 
-        book.updateBook(updateBookRequestDto.price());
+        book.update(updateBookRequestDto);
         bookRepository.save(book);
         return new BookDto(book);
     }
