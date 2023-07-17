@@ -35,4 +35,4 @@ CREATE TABLE order_item
     quantity      INTEGER NOT NULL,
     CONSTRAINT fk_order_item_to_orders FOREIGN KEY (order_id) references orders (order_id) ON DELETE CASCADE,
     CONSTRAINT fk_order_item_to_book FOREIGN KEY (book_id) references book (book_id) ON DELETE CASCADE
-)
+);

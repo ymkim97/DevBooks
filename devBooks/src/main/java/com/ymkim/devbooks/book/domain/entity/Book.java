@@ -25,4 +25,8 @@ public class Book {
         this.price = price;
         this.publishedAt = publishedAt;
     }
+
+    public void updateBook(long price) {
+        this.price = price;
+    }
 }
