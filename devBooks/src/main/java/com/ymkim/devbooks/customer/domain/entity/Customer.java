@@ -4,16 +4,21 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
-@Table("CUSTOMER")
+@Table("customer")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Customer {
     @Id
+    @Column("customer_id")
     private long customerId;
+    @Column("name")
     private String name;
+    @Column("phone")
     private String phone;
+    @Column("address")
     private String address;
 
     public Customer(String name, String phone, String address) {

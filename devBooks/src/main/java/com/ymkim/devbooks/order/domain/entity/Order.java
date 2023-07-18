@@ -5,20 +5,27 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Table("ORDERS")
+@Table("orders")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Order {
     @Id
+    @Column("order_id")
     private long orderId;
+    @Column("customer_id")
     private long customerId;
+    @Column("address")
     private String address;
+    @Column("postcode")
     private String postcode;
+    @Column("created_at")
     private LocalDateTime createdAt;
+    @Column("order_status")
     private OrderStatus orderStatus;
 
     public Order(long customerId, String address, String postcode, LocalDateTime createdAt, OrderStatus orderStatus) {

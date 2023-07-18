@@ -5,7 +5,6 @@ import com.ymkim.devbooks.order.domain.dto.OrderDto;
 import com.ymkim.devbooks.order.domain.dto.request.CreateOrderRequestDto;
 import com.ymkim.devbooks.order.domain.dto.request.UpdateOrderRequestDto;
 import com.ymkim.devbooks.order.domain.entity.Order;
-import com.ymkim.devbooks.order.item.domain.repository.OrderItemJdbcRepository;
 import com.ymkim.devbooks.order.domain.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,6 @@ import java.util.stream.StreamSupport;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-    private final OrderItemJdbcRepository orderItemRepository;
 
     @Override
     @Transactional
