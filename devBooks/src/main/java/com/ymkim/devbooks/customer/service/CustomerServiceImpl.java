@@ -8,6 +8,7 @@ import com.ymkim.devbooks.customer.domain.repository.CustomerJdbcRepository;
 import com.ymkim.devbooks.global.ExceptionMessages;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -20,6 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerJdbcRepository customerRepository;
 
     @Override
+    @Transactional
     public Long createCustomer(CreateCustomerRequestDto createCustomerRequestDto) {
         Customer savedCustomer = customerRepository.save(createCustomerRequestDto.toEntity());
         return savedCustomer.getCustomerId();
@@ -39,11 +41,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     public void deleteCustomerById(long id) {
         customerRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public CustomerDto updateCustomer(UpdateCustomerRequestDto customerRequestDto) {
         Customer customer = customerRepository.findById(customerRequestDto.customerId())
                 .orElseThrow(() -> new NoSuchElementException(ExceptionMessages.NO_CUSTOMER_FOUND_BY_ID_ERROR.getMessage()));

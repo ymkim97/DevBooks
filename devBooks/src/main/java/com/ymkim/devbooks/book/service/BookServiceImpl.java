@@ -8,6 +8,7 @@ import com.ymkim.devbooks.book.domain.repository.BookJdbcRepository;
 import com.ymkim.devbooks.global.ExceptionMessages;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -20,6 +21,7 @@ public class BookServiceImpl implements BookService {
     private final BookJdbcRepository bookRepository;
 
     @Override
+    @Transactional
     public Long createBook(CreateBookRequestDto createBookRequest) {
         Book savedBook = bookRepository.save(createBookRequest.toEntity());
         return savedBook.getBookId();
@@ -39,11 +41,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
+
     public void deleteBookById(long id) {
         bookRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
+
     public BookDto updateBook(UpdateBookRequestDto updateBookRequestDto) {
         Book book = bookRepository.findById(updateBookRequestDto.bookId())
                 .orElseThrow(() -> new NoSuchElementException(ExceptionMessages.NO_BOOK_FOUND_BY_ID_ERROR.getMessage()));

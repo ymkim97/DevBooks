@@ -1,13 +1,13 @@
 package com.ymkim.devbooks.order.service;
 
+import com.ymkim.devbooks.customer.domain.entity.Customer;
+import com.ymkim.devbooks.customer.domain.repository.CustomerJdbcRepository;
 import com.ymkim.devbooks.order.domain.dto.OrderDto;
 import com.ymkim.devbooks.order.domain.dto.request.CreateOrderRequestDto;
 import com.ymkim.devbooks.order.domain.dto.request.UpdateOrderRequestDto;
 import com.ymkim.devbooks.order.domain.entity.OrderStatus;
 import com.ymkim.devbooks.order.domain.repository.OrderRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -20,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ActiveProfiles("test")
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class OrderServiceImplTest {
 
     @Autowired
@@ -28,8 +29,20 @@ class OrderServiceImplTest {
     @Autowired
     OrderRepository orderRepository;
 
+    @Autowired
+    CustomerJdbcRepository customerRepository;
+
+    long customerId;
+
+    @BeforeAll
+    void setUp() {
+        customerId = customerRepository.save(
+                new Customer("TestCustomer", "TestPhone", "TestAddress"))
+                .getCustomerId();
+    }
+
     @AfterEach
-    void cleanUp() {
+    void clean() {
         orderRepository.deleteAll();
     }
 
@@ -37,7 +50,7 @@ class OrderServiceImplTest {
     @DisplayName("Order 생성 test")
     void createOrderTest() {
         // given
-        CreateOrderRequestDto orderRequestDto = new CreateOrderRequestDto("Test Address", "12345", LocalDateTime.now(), OrderStatus.ACCEPTED);
+        CreateOrderRequestDto orderRequestDto = new CreateOrderRequestDto(customerId, "Test Address", "12345", LocalDateTime.now(), OrderStatus.ACCEPTED);
 
         // when
         long id = orderService.createOrder(orderRequestDto);
@@ -51,8 +64,8 @@ class OrderServiceImplTest {
     @DisplayName("모든 order 가져오기 test")
     void testGetAllOrders() {
         // given
-        CreateOrderRequestDto orderRequestDto1 = new CreateOrderRequestDto("Test Address1", "12345", LocalDateTime.now(), OrderStatus.ACCEPTED);
-        CreateOrderRequestDto orderRequestDto2 = new CreateOrderRequestDto("Test Address2", "67890", LocalDateTime.now(), OrderStatus.READY_FOR_DELIVERY);
+        CreateOrderRequestDto orderRequestDto1 = new CreateOrderRequestDto(customerId, "Test Address1", "12345", LocalDateTime.now(), OrderStatus.ACCEPTED);
+        CreateOrderRequestDto orderRequestDto2 = new CreateOrderRequestDto(customerId, "Test Address2", "67890", LocalDateTime.now(), OrderStatus.READY_FOR_DELIVERY);
 
         // when
         orderService.createOrder(orderRequestDto1);
@@ -67,8 +80,8 @@ class OrderServiceImplTest {
     @DisplayName("Id로 Order 삭제 test")
     void testDeleteOrderById() {
         // given
-        CreateOrderRequestDto orderRequestDto1 = new CreateOrderRequestDto("Test Address1", "12345", LocalDateTime.now(), OrderStatus.ACCEPTED);
-        CreateOrderRequestDto orderRequestDto2 = new CreateOrderRequestDto("Test Address2", "67890", LocalDateTime.now(), OrderStatus.READY_FOR_DELIVERY);
+        CreateOrderRequestDto orderRequestDto1 = new CreateOrderRequestDto(customerId, "Test Address1", "12345", LocalDateTime.now(), OrderStatus.ACCEPTED);
+        CreateOrderRequestDto orderRequestDto2 = new CreateOrderRequestDto(customerId, "Test Address2", "67890", LocalDateTime.now(), OrderStatus.READY_FOR_DELIVERY);
 
         // when
         long orderId = orderService.createOrder(orderRequestDto1);
@@ -85,7 +98,7 @@ class OrderServiceImplTest {
     @DisplayName("Order 업데이트 test")
     void testUpdateOrder() {
         // given
-        CreateOrderRequestDto orderRequestDto1 = new CreateOrderRequestDto("Test Address1", "12345", LocalDateTime.now(), OrderStatus.ACCEPTED);
+        CreateOrderRequestDto orderRequestDto1 = new CreateOrderRequestDto(customerId, "Test Address1", "12345", LocalDateTime.now(), OrderStatus.ACCEPTED);
         long orderId = orderService.createOrder(orderRequestDto1);
         UpdateOrderRequestDto updateOrderRequestDto = new UpdateOrderRequestDto(orderId, "Update Test Address", "7777", OrderStatus.SHIPPED);
 

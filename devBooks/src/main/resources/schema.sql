@@ -30,7 +30,7 @@ CREATE TABLE orders
 CREATE TABLE order_item
 (
     order_item_id BIGINT auto_increment PRIMARY KEY,
-    order_id      BIGINT  NOT NULL,
+    order_id      BIGINT  DEFAULT NULL,
     book_id       BIGINT  NOT NULL,
     quantity      INTEGER NOT NULL,
     CONSTRAINT fk_order_item_to_orders FOREIGN KEY (order_id) references orders (order_id) ON DELETE CASCADE,

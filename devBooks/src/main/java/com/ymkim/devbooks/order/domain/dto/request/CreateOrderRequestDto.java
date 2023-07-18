@@ -6,9 +6,9 @@ import com.ymkim.devbooks.order.domain.entity.OrderStatus;
 import java.time.LocalDateTime;
 
 public record CreateOrderRequestDto(
-        String address, String postcode, LocalDateTime createdAt, OrderStatus orderStatus
+        long customerId, String address, String postcode, LocalDateTime createdAt, OrderStatus orderStatus
 ) {
     public Order toEntity() {
-        return new Order(this.address, this.postcode, this.createdAt, this.orderStatus);
+        return new Order(this.customerId, this.address, this.postcode, this.createdAt, this.orderStatus);
     }
 }

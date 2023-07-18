@@ -5,9 +5,11 @@ import com.ymkim.devbooks.order.domain.dto.OrderDto;
 import com.ymkim.devbooks.order.domain.dto.request.CreateOrderRequestDto;
 import com.ymkim.devbooks.order.domain.dto.request.UpdateOrderRequestDto;
 import com.ymkim.devbooks.order.domain.entity.Order;
+import com.ymkim.devbooks.order.item.domain.repository.OrderItemJdbcRepository;
 import com.ymkim.devbooks.order.domain.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -18,8 +20,10 @@ import java.util.stream.StreamSupport;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
+    private final OrderItemJdbcRepository orderItemRepository;
 
     @Override
+    @Transactional
     public Long createOrder(CreateOrderRequestDto createOrderRequestDto) {
         Order savedOrder = orderRepository.save(createOrderRequestDto.toEntity());
         return orderRepository.save(savedOrder).getOrderId();
@@ -39,11 +43,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public void deleteOrderById(long id) {
         orderRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public OrderDto updateOrder(UpdateOrderRequestDto updateOrderRequestDto) {
         Order order = orderRepository.findById(updateOrderRequestDto.orderId())
                 .orElseThrow(() -> new NoSuchElementException(ExceptionMessages.NO_ORDER_FOUND_BY_ID_ERROR.getMessage()));

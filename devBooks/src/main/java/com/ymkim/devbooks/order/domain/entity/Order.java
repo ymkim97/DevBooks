@@ -15,12 +15,14 @@ import java.time.LocalDateTime;
 public class Order {
     @Id
     private long orderId;
+    private long customerId;
     private String address;
     private String postcode;
     private LocalDateTime createdAt;
     private OrderStatus orderStatus;
 
-    public Order(String address, String postcode, LocalDateTime createdAt, OrderStatus orderStatus) {
+    public Order(long customerId, String address, String postcode, LocalDateTime createdAt, OrderStatus orderStatus) {
+        this.customerId = customerId;
         this.address = address;
         this.postcode = postcode;
         this.createdAt = createdAt;
