@@ -90,11 +90,11 @@ class OrderServiceImplTest {
         UpdateOrderRequestDto updateOrderRequestDto = new UpdateOrderRequestDto(orderId, "Update Test Address", "7777", OrderStatus.SHIPPED);
 
         // when
-        OrderDto orderDto = orderService.updateOrder(updateOrderRequestDto);
-        orderService.findOrderById(orderId);
+        orderService.updateOrder(updateOrderRequestDto);
+        Optional<OrderDto> orderDto = orderService.findOrderById(orderId);
 
         // then
-        assertThat(orderDto.address()).isEqualTo(updateOrderRequestDto.address());
-        assertThat(orderDto.postcode()).isEqualTo(updateOrderRequestDto.postcode());
+        assertThat(orderDto.get().address()).isEqualTo(updateOrderRequestDto.address());
+        assertThat(orderDto.get().postcode()).isEqualTo(updateOrderRequestDto.postcode());
     }
 }

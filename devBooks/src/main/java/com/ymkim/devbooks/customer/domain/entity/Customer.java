@@ -21,4 +21,9 @@ public class Customer {
         this.phone = phone;
         this.address = address;
     }
+
+    public void update(String phone, String address) {
+        this.phone = phone;
+        this.address = address;
+    }
 }
