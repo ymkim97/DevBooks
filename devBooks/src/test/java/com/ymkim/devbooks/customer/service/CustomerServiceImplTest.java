@@ -71,8 +71,7 @@ class CustomerServiceImplTest {
         // when
         long customerId = customerService.createCustomer(customerRequestDto1);
         customerService.createCustomer(customerRequestDto2);
-        Optional<CustomerDto> customer = customerService.findCustomerById(customerId);
-        customerService.deleteCustomerById(customer.get().customerId());
+        customerService.deleteCustomerById(customerId);
         List<CustomerDto> customers = customerService.getAllCustomers();
 
         // then

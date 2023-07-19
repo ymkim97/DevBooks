@@ -76,8 +76,7 @@ class BookServiceImplTest {
         // when
         long id = bookService.createBook(dto1);
         bookService.createBook(dto2);
-        Optional<BookDto> bookById = bookService.findBookById(id);
-        bookService.deleteBookById(bookById.get().bookId());
+        bookService.deleteBookById(id);
         List<BookDto> allBooks = bookService.getAllBooks();
 
         // then

@@ -86,8 +86,7 @@ class OrderServiceImplTest {
         // when
         long orderId = orderService.createOrder(orderRequestDto1);
         orderService.createOrder(orderRequestDto2);
-        Optional<OrderDto> orderDto = orderService.findOrderById(orderId);
-        orderService.deleteOrderById(orderDto.get().orderId());
+        orderService.deleteOrderById(orderId);
         List<OrderDto> allOrders = orderService.getAllOrders();
 
         // then
