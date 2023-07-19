@@ -46,7 +46,7 @@ public class BookRestController {
         bookService.deleteBookById(id);
         return ResponseEntity
                 .ok()
-                .body("Deleted Successfully!");
+                .body("Book Deleted Successfully!");
     }
 
     @GetMapping("/{id}")
