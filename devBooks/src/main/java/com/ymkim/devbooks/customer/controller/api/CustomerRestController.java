@@ -1,4 +1,4 @@
-package com.ymkim.devbooks.customer.domain.controller.api;
+package com.ymkim.devbooks.customer.controller.api;
 
 import com.ymkim.devbooks.customer.domain.dto.CustomerDto;
 import com.ymkim.devbooks.customer.domain.dto.request.CreateCustomerRequestDto;
