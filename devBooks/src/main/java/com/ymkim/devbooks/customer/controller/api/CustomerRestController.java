@@ -4,6 +4,7 @@ import com.ymkim.devbooks.customer.domain.dto.CustomerDto;
 import com.ymkim.devbooks.customer.domain.dto.request.CreateCustomerRequestDto;
 import com.ymkim.devbooks.customer.domain.dto.request.UpdateCustomerRequestDto;
 import com.ymkim.devbooks.customer.service.CustomerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,40 +14,32 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/customer")
+@RequestMapping("/api/v1/customers")
 public class CustomerRestController {
     private final CustomerService customerService;
 
-    @PostMapping("/create")
-    public ResponseEntity<Long> createCustomer(@RequestBody CreateCustomerRequestDto createCustomerRequestDto) {
+    @PostMapping
+    public ResponseEntity<Long> createCustomer(@Valid  @RequestBody CreateCustomerRequestDto createCustomerRequestDto) {
         long customerId = customerService.createCustomer(createCustomerRequestDto);
-        return ResponseEntity
-                .ok()
-                .body(customerId);
+        return ResponseEntity.ok().body(customerId);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<CustomerDto> updateCustomer(@RequestBody UpdateCustomerRequestDto updateCustomerRequestDto) {
+    @PutMapping
+    public ResponseEntity<CustomerDto> updateCustomer(@Valid @RequestBody UpdateCustomerRequestDto updateCustomerRequestDto) {
         CustomerDto customerDto = customerService.updateCustomer(updateCustomerRequestDto);
-        return ResponseEntity
-                .ok()
-                .body(customerDto);
+        return ResponseEntity.ok().body(customerDto);
     }
 
-    @GetMapping("/customers")
+    @GetMapping
     public ResponseEntity<List<CustomerDto>> getCustomers() {
         List<CustomerDto> customers = customerService.getAllCustomers();
-        return ResponseEntity
-                .ok()
-                .body(customers);
+        return ResponseEntity.ok().body(customers);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable("id") long id) {
         customerService.deleteCustomerById(id);
-        return ResponseEntity
-                .ok()
-                .body("Customer Deleted Successfully!");
+        return ResponseEntity.ok().body("Customer Deleted Successfully!");
     }
 
     @GetMapping("/{id}")

@@ -4,6 +4,7 @@ import com.ymkim.devbooks.order.domain.dto.OrderDto;
 import com.ymkim.devbooks.order.domain.dto.request.CreateOrderRequestDto;
 import com.ymkim.devbooks.order.domain.dto.request.UpdateOrderRequestDto;
 import com.ymkim.devbooks.order.service.OrderService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,40 +14,32 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/order")
+@RequestMapping("/api/v1/orders")
 public class OrderRestController {
     private final OrderService orderService;
 
-    @PostMapping("/create")
-    public ResponseEntity<Long> createOrder(@RequestBody CreateOrderRequestDto createOrderRequestDto) {
+    @PostMapping
+    public ResponseEntity<Long> createOrder(@Valid @RequestBody CreateOrderRequestDto createOrderRequestDto) {
         Long orderId = orderService.createOrder(createOrderRequestDto);
-        return ResponseEntity
-                .ok()
-                .body(orderId);
+        return ResponseEntity.ok().body(orderId);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<OrderDto> updateOrder(@RequestBody UpdateOrderRequestDto updateOrderRequestDto) {
+    @PutMapping
+    public ResponseEntity<OrderDto> updateOrder(@Valid @RequestBody UpdateOrderRequestDto updateOrderRequestDto) {
         OrderDto orderDto = orderService.updateOrder(updateOrderRequestDto);
-        return ResponseEntity
-                .ok()
-                .body(orderDto);
+        return ResponseEntity.ok().body(orderDto);
     }
 
-    @GetMapping("/orders")
+    @GetMapping
     public ResponseEntity<List<OrderDto>> getOrders() {
         List<OrderDto> orders = orderService.getAllOrders();
-        return ResponseEntity
-                .ok()
-                .body(orders);
+        return ResponseEntity.ok().body(orders);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteOrder(@PathVariable("id") long id) {
         orderService.deleteOrderById(id);
-        return ResponseEntity
-                .ok()
-                .body("Order Deleted Successfully!");
+        return ResponseEntity.ok().body("Order Deleted Successfully!");
     }
 
     @GetMapping("/{id}")
