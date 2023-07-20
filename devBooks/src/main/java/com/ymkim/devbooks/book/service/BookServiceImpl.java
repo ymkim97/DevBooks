@@ -18,6 +18,7 @@ import java.util.stream.StreamSupport;
 @Service
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
+
     private final BookJdbcRepository bookRepository;
 
     @Override
@@ -42,14 +43,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-
     public void deleteBookById(long id) {
         bookRepository.deleteById(id);
     }
 
     @Override
     @Transactional
-
     public BookDto updateBook(UpdateBookRequestDto updateBookRequestDto) {
         Book book = bookRepository.findById(updateBookRequestDto.bookId())
                 .orElseThrow(() -> new NoSuchElementException(ExceptionMessages.NO_BOOK_FOUND_BY_ID_ERROR.getMessage()));

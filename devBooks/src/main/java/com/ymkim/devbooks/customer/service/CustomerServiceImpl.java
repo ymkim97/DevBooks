@@ -18,6 +18,7 @@ import java.util.stream.StreamSupport;
 @Service
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
+
     private final CustomerJdbcRepository customerRepository;
 
     @Override

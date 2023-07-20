@@ -13,13 +13,13 @@ import org.springframework.data.relational.core.mapping.Table;
 public class OrderItem {
     @Id
     @Column("order_item_id")
-    private long orderItemId;
+    private Long orderItemId;
     @Column("order_id")
-    private long orderId;
+    private Long orderId;
     @Column("book_id")
-    private long bookId;
+    private Long bookId;
     @Column("quantity")
-    private int quantity;
+    private Integer quantity;
 
     public OrderItem(long orderId, long bookId, int quantity) {
         this.orderId = orderId;

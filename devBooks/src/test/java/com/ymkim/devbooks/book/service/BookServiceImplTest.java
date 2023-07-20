@@ -39,7 +39,7 @@ class BookServiceImplTest {
     @DisplayName("새로운 Book 생성 test")
     void createBookTest() {
         // given
-        CreateBookRequestDto dto = new CreateBookRequestDto("Test", "TestAuthor", Category.COOK, 1000, LocalDate.now());
+        CreateBookRequestDto dto = new CreateBookRequestDto("Test", "TestAuthor", Category.COOK, 1000L, LocalDate.now());
 
         // when
         long id = bookService.createBook(dto);
@@ -54,8 +54,8 @@ class BookServiceImplTest {
     @DisplayName("모든 Book 가져오기 test")
     void getAllBooksTest() {
         // given
-        CreateBookRequestDto dto1 = new CreateBookRequestDto("Test", "TestAuthor", Category.COOK, 1000, LocalDate.now());
-        CreateBookRequestDto dto2 = new CreateBookRequestDto("Test2", "TestAuthor2", Category.FICTION, 3000, LocalDate.now());
+        CreateBookRequestDto dto1 = new CreateBookRequestDto("Test", "TestAuthor", Category.COOK, 1000L, LocalDate.now());
+        CreateBookRequestDto dto2 = new CreateBookRequestDto("Test2", "TestAuthor2", Category.FICTION, 3000L, LocalDate.now());
 
         // when
         bookService.createBook(dto1);
@@ -70,8 +70,8 @@ class BookServiceImplTest {
     @DisplayName("Id로 Book 삭제 test")
     void deleteBookByIdTest() {
         // given
-        CreateBookRequestDto dto1 = new CreateBookRequestDto("Test", "TestAuthor", Category.COOK, 1000, LocalDate.now());
-        CreateBookRequestDto dto2 = new CreateBookRequestDto("Test2", "TestAuthor2", Category.FICTION, 3000, LocalDate.now());
+        CreateBookRequestDto dto1 = new CreateBookRequestDto("Test", "TestAuthor", Category.COOK, 1000L, LocalDate.now());
+        CreateBookRequestDto dto2 = new CreateBookRequestDto("Test2", "TestAuthor2", Category.FICTION, 3000L, LocalDate.now());
 
         // when
         long id = bookService.createBook(dto1);
@@ -87,9 +87,9 @@ class BookServiceImplTest {
     @DisplayName("Book 업데이트 test")
     void updateBook() {
         // given
-        CreateBookRequestDto createBookRequestDto = new CreateBookRequestDto("Test", "TestAuthor", Category.COOK, 1000, LocalDate.now());
+        CreateBookRequestDto createBookRequestDto = new CreateBookRequestDto("Test", "TestAuthor", Category.COOK, 1000L, LocalDate.now());
         Long bookId = bookService.createBook(createBookRequestDto);
-        UpdateBookRequestDto updateBookRequestDto = new UpdateBookRequestDto(bookId, 5000);
+        UpdateBookRequestDto updateBookRequestDto = new UpdateBookRequestDto(bookId, 5000L);
 
         // when
         bookService.updateBook(updateBookRequestDto);

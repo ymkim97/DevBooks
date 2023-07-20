@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Book {
     @Id
     @Column("book_id")
-    private long bookId;
+    private Long bookId;
     @Column("title")
     private String title;
     @Column("author")
@@ -22,7 +22,7 @@ public class Book {
     @Column("category")
     private Category category;
     @Column("price")
-    private long price;
+    private Long price;
     @Column("published_at")
     private LocalDate publishedAt;
 

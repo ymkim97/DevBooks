@@ -16,10 +16,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/customers")
 public class CustomerRestController {
+
     private final CustomerService customerService;
 
     @PostMapping
-    public ResponseEntity<Long> createCustomer(@Valid  @RequestBody CreateCustomerRequestDto createCustomerRequestDto) {
+    public ResponseEntity<Long> createCustomer(@Valid @RequestBody CreateCustomerRequestDto createCustomerRequestDto) {
         long customerId = customerService.createCustomer(createCustomerRequestDto);
         return ResponseEntity.ok().body(customerId);
     }

@@ -16,9 +16,9 @@ import java.time.LocalDateTime;
 public class Order {
     @Id
     @Column("order_id")
-    private long orderId;
+    private Long orderId;
     @Column("customer_id")
-    private long customerId;
+    private Long customerId;
     @Column("address")
     private String address;
     @Column("postcode")

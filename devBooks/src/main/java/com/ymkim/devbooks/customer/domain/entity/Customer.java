@@ -13,7 +13,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Customer {
     @Id
     @Column("customer_id")
-    private long customerId;
+    private Long customerId;
     @Column("name")
     private String name;
     @Column("phone")
