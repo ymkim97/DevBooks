@@ -1,5 +1,6 @@
 package com.ymkim.devbooks.order.item.service;
 
+import com.ymkim.devbooks.order.item.domain.dto.OrderItemDto;
 import com.ymkim.devbooks.order.item.domain.dto.request.CreateOrderItemRequestDto;
 import com.ymkim.devbooks.order.item.domain.entity.OrderItem;
 import com.ymkim.devbooks.order.item.domain.repository.OrderItemJdbcRepository;
@@ -15,8 +16,8 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     @Transactional
-    public Long createOrderItem(CreateOrderItemRequestDto createOrderItemRequestDto) {
-        OrderItem orderItem = orderItemRepository.save(createOrderItemRequestDto.toEntity());
+    public Long createOrderItem(OrderItemDto orderItemDto) {
+        OrderItem orderItem = orderItemRepository.save(orderItemDto.toEntity());
         return orderItem.getOrderItemId();
     }
 }

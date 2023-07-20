@@ -12,4 +12,8 @@ public record OrderItemDto(
     public OrderItemDto(OrderItem orderItem) {
         this(orderItem.getOrderId(), orderItem.getBookId(), orderItem.getQuantity());
     }
+
+    public OrderItem toEntity() {
+        return new OrderItem(this.orderId, this.bookId, this.quantity);
+    }
 }

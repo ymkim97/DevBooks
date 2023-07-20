@@ -1,8 +1,8 @@
 package com.ymkim.devbooks.order.item.service;
 
-import com.ymkim.devbooks.order.item.domain.dto.request.CreateOrderItemRequestDto;
+import com.ymkim.devbooks.order.item.domain.dto.OrderItemDto;
 
 public interface OrderItemService {
 
-    Long createOrderItem(CreateOrderItemRequestDto createOrderItemRequestDto);
+    Long createOrderItem(OrderItemDto orderItemDto);
 }

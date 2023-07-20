@@ -3,6 +3,8 @@ package com.ymkim.devbooks.order.controller.api;
 import com.ymkim.devbooks.order.domain.dto.OrderDto;
 import com.ymkim.devbooks.order.domain.dto.request.CreateOrderRequestDto;
 import com.ymkim.devbooks.order.domain.dto.request.UpdateOrderRequestDto;
+import com.ymkim.devbooks.order.item.domain.dto.OrderItemDto;
+import com.ymkim.devbooks.order.item.domain.dto.request.CreateOrderItemRequestDto;
 import com.ymkim.devbooks.order.item.service.OrderItemService;
 import com.ymkim.devbooks.order.service.OrderService;
 import jakarta.validation.Valid;
@@ -19,10 +21,17 @@ import java.util.Optional;
 public class OrderRestController {
 
     private final OrderService orderService;
+    private final OrderItemService orderItemService;
 
     @PostMapping
     public ResponseEntity<Long> createOrder(@Valid @RequestBody CreateOrderRequestDto createOrderRequestDto) {
         Long orderId = orderService.createOrder(createOrderRequestDto);
+        List<CreateOrderItemRequestDto> createOrderItemDtos = createOrderRequestDto.orderItems();
+
+        for (CreateOrderItemRequestDto createItemDto : createOrderItemDtos) {
+            OrderItemDto itemDto = new OrderItemDto(orderId, createItemDto.bookId(), createItemDto.quantity());
+            orderItemService.createOrderItem(itemDto);
+        }
         return ResponseEntity.ok().body(orderId);
     }
 

@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +51,12 @@ class OrderServiceImplTest {
     @DisplayName("Order 생성 test")
     void createOrderTest() {
         // given
-        CreateOrderRequestDto orderRequestDto = new CreateOrderRequestDto(customerId, "Test Address", "12345", LocalDateTime.now(), OrderStatus.ACCEPTED);
+        CreateOrderRequestDto orderRequestDto = new CreateOrderRequestDto(customerId,
+                "Test Address",
+                "12345",
+                LocalDateTime.now(),
+                OrderStatus.ACCEPTED,
+                Collections.emptyList());
 
         // when
         long id = orderService.createOrder(orderRequestDto);
@@ -64,8 +70,18 @@ class OrderServiceImplTest {
     @DisplayName("모든 order 가져오기 test")
     void testGetAllOrders() {
         // given
-        CreateOrderRequestDto orderRequestDto1 = new CreateOrderRequestDto(customerId, "Test Address1", "12345", LocalDateTime.now(), OrderStatus.ACCEPTED);
-        CreateOrderRequestDto orderRequestDto2 = new CreateOrderRequestDto(customerId, "Test Address2", "67890", LocalDateTime.now(), OrderStatus.READY_FOR_DELIVERY);
+        CreateOrderRequestDto orderRequestDto1 = new CreateOrderRequestDto(customerId,
+                "Test Address1",
+                "12345",
+                LocalDateTime.now(),
+                OrderStatus.ACCEPTED,
+                Collections.emptyList());
+        CreateOrderRequestDto orderRequestDto2 = new CreateOrderRequestDto(customerId,
+                "Test Address2",
+                "67890",
+                LocalDateTime.now(),
+                OrderStatus.READY_FOR_DELIVERY,
+                Collections.emptyList());
 
         // when
         orderService.createOrder(orderRequestDto1);
@@ -80,8 +96,18 @@ class OrderServiceImplTest {
     @DisplayName("Id로 Order 삭제 test")
     void testDeleteOrderById() {
         // given
-        CreateOrderRequestDto orderRequestDto1 = new CreateOrderRequestDto(customerId, "Test Address1", "12345", LocalDateTime.now(), OrderStatus.ACCEPTED);
-        CreateOrderRequestDto orderRequestDto2 = new CreateOrderRequestDto(customerId, "Test Address2", "67890", LocalDateTime.now(), OrderStatus.READY_FOR_DELIVERY);
+        CreateOrderRequestDto orderRequestDto1 = new CreateOrderRequestDto(customerId,
+                "Test Address1",
+                "12345",
+                LocalDateTime.now(),
+                OrderStatus.ACCEPTED,
+                Collections.emptyList());
+        CreateOrderRequestDto orderRequestDto2 = new CreateOrderRequestDto(customerId,
+                "Test Address2",
+                "67890",
+                LocalDateTime.now(),
+                OrderStatus.READY_FOR_DELIVERY,
+                Collections.emptyList());
 
         // when
         long orderId = orderService.createOrder(orderRequestDto1);
@@ -97,9 +123,17 @@ class OrderServiceImplTest {
     @DisplayName("Order 업데이트 test")
     void testUpdateOrder() {
         // given
-        CreateOrderRequestDto orderRequestDto1 = new CreateOrderRequestDto(customerId, "Test Address1", "12345", LocalDateTime.now(), OrderStatus.ACCEPTED);
+        CreateOrderRequestDto orderRequestDto1 = new CreateOrderRequestDto(customerId,
+                "Test Address1",
+                "12345",
+                LocalDateTime.now(),
+                OrderStatus.ACCEPTED,
+                Collections.emptyList());
         long orderId = orderService.createOrder(orderRequestDto1);
-        UpdateOrderRequestDto updateOrderRequestDto = new UpdateOrderRequestDto(orderId, "Update Test Address", "7777", OrderStatus.SHIPPED);
+        UpdateOrderRequestDto updateOrderRequestDto = new UpdateOrderRequestDto(orderId,
+                "Update Test Address",
+                "7777",
+                OrderStatus.SHIPPED);
 
         // when
         orderService.updateOrder(updateOrderRequestDto);
