@@ -1,6 +1,10 @@
 package com.ymkim.devbooks.book.domain.dto.request;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 public record UpdateBookRequestDto(
-        long bookId, long price
+        @NotNull Long bookId,
+        @NotNull @Positive Long price
 ) {
 }

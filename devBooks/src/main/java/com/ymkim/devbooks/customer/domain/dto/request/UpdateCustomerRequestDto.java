@@ -1,6 +1,11 @@
 package com.ymkim.devbooks.customer.domain.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public record UpdateCustomerRequestDto(
-        long customerId, String phone, String address
+        @NotNull Long customerId,
+        @NotBlank String phone,
+        @NotBlank String address
 ) {
 }
