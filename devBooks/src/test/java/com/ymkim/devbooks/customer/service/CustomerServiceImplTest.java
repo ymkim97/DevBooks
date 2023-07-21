@@ -39,7 +39,7 @@ class CustomerServiceImplTest {
 
         // when
         long savedId = customerService.createCustomer(customerRequestDto);
-        Optional<CustomerDto> customer = customerService.findCustomerById(savedId);
+        Optional<CustomerDto> customer = customerService.findCustomer(savedId);
 
         // then
         assertThat(customer).isNotEmpty();
@@ -71,7 +71,7 @@ class CustomerServiceImplTest {
         // when
         long customerId = customerService.createCustomer(customerRequestDto1);
         customerService.createCustomer(customerRequestDto2);
-        customerService.deleteCustomerById(customerId);
+        customerService.deleteCustomer(customerId);
         List<CustomerDto> customers = customerService.getAllCustomers();
 
         // then
@@ -88,7 +88,7 @@ class CustomerServiceImplTest {
 
         // when
         customerService.updateCustomer(updateCustomerRequestDto);
-        Optional<CustomerDto> customerDto = customerService.findCustomerById(customerId);
+        Optional<CustomerDto> customerDto = customerService.findCustomer(customerId);
 
         // then
         assertThat(customerDto.get().phone()).isEqualTo(updateCustomerRequestDto.phone());

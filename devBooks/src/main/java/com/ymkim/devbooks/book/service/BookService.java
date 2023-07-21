@@ -10,11 +10,11 @@ import java.util.Optional;
 public interface BookService {
     Long createBook(CreateBookRequestDto createBookRequestDto);
 
-    Optional<BookDto> findBookById(long id);
+    Optional<BookDto> findBook(long id);
 
     List<BookDto> getAllBooks();
 
-    void deleteBookById(long id);
+    void deleteBook(long id);
 
     BookDto updateBook(UpdateBookRequestDto updateBookRequestDto);
 }

@@ -9,12 +9,14 @@ import com.ymkim.devbooks.order.item.service.OrderItemService;
 import com.ymkim.devbooks.order.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/orders")
@@ -25,6 +27,7 @@ public class OrderRestController {
 
     @PostMapping
     public ResponseEntity<Long> createOrder(@Valid @RequestBody CreateOrderRequestDto createOrderRequestDto) {
+        log.info(createOrderRequestDto.address());
         Long orderId = orderService.createOrder(createOrderRequestDto);
         List<CreateOrderItemRequestDto> createOrderItemDtos = createOrderRequestDto.orderItems();
 
@@ -49,13 +52,13 @@ public class OrderRestController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteOrder(@PathVariable("id") long id) {
-        orderService.deleteOrderById(id);
+        orderService.deleteOrder(id);
         return ResponseEntity.ok().body("Order Deleted Successfully!");
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<OrderDto> getOrder(@PathVariable("id") long id) {
-        Optional<OrderDto> order = orderService.findOrderById(id);
+        Optional<OrderDto> order = orderService.findOrder(id);
         return order.map(orderDto -> ResponseEntity.ok()
                 .body(orderDto)).orElseGet(() -> ResponseEntity.badRequest().build());
     }

@@ -60,7 +60,7 @@ class OrderServiceImplTest {
 
         // when
         long id = orderService.createOrder(orderRequestDto);
-        Optional<OrderDto> orderDto = orderService.findOrderById(id);
+        Optional<OrderDto> orderDto = orderService.findOrder(id);
 
         //then
         assertThat(orderDto).isNotEmpty();
@@ -112,7 +112,7 @@ class OrderServiceImplTest {
         // when
         long orderId = orderService.createOrder(orderRequestDto1);
         orderService.createOrder(orderRequestDto2);
-        orderService.deleteOrderById(orderId);
+        orderService.deleteOrder(orderId);
         List<OrderDto> allOrders = orderService.getAllOrders();
 
         // then
@@ -137,7 +137,7 @@ class OrderServiceImplTest {
 
         // when
         orderService.updateOrder(updateOrderRequestDto);
-        Optional<OrderDto> orderDto = orderService.findOrderById(orderId);
+        Optional<OrderDto> orderDto = orderService.findOrder(orderId);
 
         // then
         assertThat(orderDto.get().address()).isEqualTo(updateOrderRequestDto.address());

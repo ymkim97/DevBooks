@@ -43,7 +43,7 @@ class BookServiceImplTest {
 
         // when
         long id = bookService.createBook(dto);
-        Optional<BookDto> bookDto = bookService.findBookById(id);
+        Optional<BookDto> bookDto = bookService.findBook(id);
 
         // then
         assertThat(bookDto).isNotEmpty();
@@ -76,7 +76,7 @@ class BookServiceImplTest {
         // when
         long id = bookService.createBook(dto1);
         bookService.createBook(dto2);
-        bookService.deleteBookById(id);
+        bookService.deleteBook(id);
         List<BookDto> allBooks = bookService.getAllBooks();
 
         // then
@@ -93,7 +93,7 @@ class BookServiceImplTest {
 
         // when
         bookService.updateBook(updateBookRequestDto);
-        BookDto book = bookService.findBookById(bookId).get();
+        BookDto book = bookService.findBook(bookId).get();
 
         // then
         assertThat(book.price()).isEqualTo(5000);

@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Optional<CustomerDto> findCustomerById(long id) {
+    public Optional<CustomerDto> findCustomer(long id) {
         Optional<Customer> customer = customerRepository.findById(id);
         return customer.map(CustomerDto::new);
     }
@@ -43,7 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public void deleteCustomerById(long id) {
+    public void deleteCustomer(long id) {
         customerRepository.deleteById(id);
     }
 

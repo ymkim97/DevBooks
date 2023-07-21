@@ -10,11 +10,11 @@ import java.util.Optional;
 public interface OrderService {
     Long createOrder(CreateOrderRequestDto createOrderRequestDto);
 
-    Optional<OrderDto> findOrderById(long id);
+    Optional<OrderDto> findOrder(long id);
 
     List<OrderDto> getAllOrders();
 
-    void deleteOrderById(long id);
+    void deleteOrder(long id);
 
     OrderDto updateOrder(UpdateOrderRequestDto updateOrderRequestDto);
 }

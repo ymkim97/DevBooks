@@ -29,7 +29,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Optional<BookDto> findBookById(long id) {
+    public Optional<BookDto> findBook(long id) {
         Optional<Book> book = bookRepository.findById(id);
         return book.map(BookDto::new);
     }
@@ -43,7 +43,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public void deleteBookById(long id) {
+    public void deleteBook(long id) {
         bookRepository.deleteById(id);
     }
 

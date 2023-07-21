@@ -39,13 +39,13 @@ public class BookRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteBook(@PathVariable("id") Long id) {
-        bookService.deleteBookById(id);
+        bookService.deleteBook(id);
         return ResponseEntity.ok().body("Book Deleted Successfully!");
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<BookDto> getBook(@PathVariable("id") Long id) {
-        Optional<BookDto> book = bookService.findBookById(id);
+        Optional<BookDto> book = bookService.findBook(id);
         return book.map(bookDto -> ResponseEntity.ok()
                 .body(bookDto)).orElseGet(() -> ResponseEntity.badRequest().build());
     }

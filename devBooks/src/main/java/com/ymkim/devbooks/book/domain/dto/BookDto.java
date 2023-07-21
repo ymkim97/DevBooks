@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Positive;
 import java.time.LocalDate;
 
 public record BookDto(
+        @NotNull Long bookId,
         @NotBlank String title,
         @NotBlank String author,
         @NotNull Category category,
@@ -16,7 +17,8 @@ public record BookDto(
         @NotNull LocalDate publishedAt
 ) {
     public BookDto (Book book) {
-        this(book.getTitle(),
+        this(book.getBookId(),
+            book.getTitle(),
             book.getAuthor(),
             book.getCategory(),
             book.getPrice(),

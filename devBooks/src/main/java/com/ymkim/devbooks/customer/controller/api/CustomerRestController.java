@@ -39,13 +39,13 @@ public class CustomerRestController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable("id") long id) {
-        customerService.deleteCustomerById(id);
+        customerService.deleteCustomer(id);
         return ResponseEntity.ok().body("Customer Deleted Successfully!");
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CustomerDto> getCustomer(@PathVariable("id") long id) {
-        Optional<CustomerDto> customer = customerService.findCustomerById(id);
+        Optional<CustomerDto> customer = customerService.findCustomer(id);
         return customer.map(customerDto -> ResponseEntity.ok()
                 .body(customerDto)).orElseGet(() -> (ResponseEntity.badRequest().build()));
     }

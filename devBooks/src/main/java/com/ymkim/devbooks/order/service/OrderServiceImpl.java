@@ -29,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<OrderDto> findOrderById(long id) {
+    public Optional<OrderDto> findOrder(long id) {
         Optional<Order> order = orderRepository.findById(id);
         return order.map(OrderDto::new);
     }
@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public void deleteOrderById(long id) {
+    public void deleteOrder(long id) {
         orderRepository.deleteById(id);
     }
 
