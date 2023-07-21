@@ -34,7 +34,7 @@ class BookRestControllerTest {
     @DisplayName("BOOK 생성 테스트")
     void test() throws Exception {
         // given
-        CreateBookRequestDto bookRequestDto = new CreateBookRequestDto("Test-Title",
+        CreateBookRequestDto bookRequestDto = new CreateBookRequestDto("TestController-Title",
                 "Test-Author",
                 Category.FICTION,
                 1000L,
